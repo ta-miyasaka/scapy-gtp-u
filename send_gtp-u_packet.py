@@ -11,9 +11,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-s', '--sport', default=2152,
-                        type=int, help="UDP Source port")
-    parser.add_argument('-d', '--dport', default=2152,
-                        type=int, help="UDP Destination port")
+                        type=int, help="UDP Source port. If the random option (-r/--random) is active, the source UDP port will be randomized")
     parser.add_argument('-a', '--address', type=str, help="Destination IPv4 address")
     parser.add_argument('-t', '--teid', default=1,
                         type=int, help="GTP-U Tunnel Endpoint Identifier(TEID)")
@@ -30,7 +28,7 @@ if __name__ == '__main__':
     payload = "test "*20
 
     outerIp = IP(dst=args.address)
-    outerUdp = UDP(sport=args.sport, dport=args.dport)
+    outerUdp = UDP(sport=args.sport, dport=2152)
     gtpHeader = GTP_U_Header(teid=args.teid, next_ex=133)/GTPPDUSessionContainer(type=1, QFI=args.qfi)
     innerIp = IP(src="10.0.0.1", dst="10.0.0.2")/TCP(sport=10001,dport=443)/payload
 
