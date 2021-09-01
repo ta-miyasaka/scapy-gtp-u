@@ -40,6 +40,6 @@ if __name__ == '__main__':
         time.sleep(mint)
         if (args.random):
             srcUdpPort = random.randrange(49152,65535,1)
-            outerUdp = UDP(sport=srcUdpPort, dport=args.dport)
+            outerUdp = UDP(sport=srcUdpPort, dport=2152)
         sendingPacket = outerIp/outerUdp/gtpHeader/innerIp
         send(sendingPacket, verbose=True)
